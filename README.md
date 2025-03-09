@@ -1,65 +1,108 @@
-# React and Redux
+# 📖 final-capstone-project-front-end
 
-If you are not familiar with linters and GitHub Actions, read [root level README](../README.md).
+The project is based on an app to book an appointment to try a Car. User see all cars in database and is able to book and try one. User can add and delete a car if user role is admin
 
-## Set-up GitHub Actions
+## 🛠 Built With
 
-This GitHub Action is going to run [ESLint](https://eslint.org/) and [Stylelint](https://stylelint.io/) to help you find style issues.
+### Tech Stack
 
-[Stylelint](https://stylelint.io/) is a linter for your stylesheets that helps you avoid errors and enforce conventions.
+<!-- Features -->
 
-[ESLint](https://eslint.org/) is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code, with the goal of making code more consistent and avoiding bugs.
+### Key Features
 
-Please do the following **steps in this order**:
+- **Create, Read, and Update Cars**
+- **Book Cars**
+- **Authentication with devise**
 
-1. In the first commit of your feature branch create a `.github/workflows` folder and add a copy of [`.github/workflows/linters.yml`](.github/workflows/linters.yml) to that folder.
-    - **Remember** to use the file linked above
-    - **Remember** that `.github` folder starts with a dot.
-2. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-    - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-3. When you open your first pull request you should see the result of the GitHub Actions:
+<!-- LIVE DEMO -->
 
-![gh actions checks](../assets/images/gh-actions-eslint-stylelint-checks.png)
+## 🚀 Live Demo
 
-Click on the `Details` link to see the full output and the errors that need to be fixed:
+- [Live Demo Link](https://reserve-car.onrender.com/)
+- [API URL](https://microverse-final-capstone-backend.onrender.com)
 
-![gh actions failing checks](../assets/images/gh-actions-html-css-failing-checks.png)
+<!-- GETTING STARTED -->
 
-## Set-up linters in your local env
+## 💻 Getting Started
 
-### ESLint
+To get a local copy up and running, follow these steps.
 
-1. Run 
-    ```
-    npm install --save-dev eslint@7.x eslint-config-airbnb@18.x eslint-plugin-import@2.x eslint-plugin-jsx-a11y@6.x eslint-plugin-react@7.x eslint-plugin-react-hooks@4.x @babel/eslint-parser@7.x @babel/core@7.x  @babel/plugin-syntax-jsx@7.x  @babel/preset-react@7.x @babel/preset-react@7.x
-    ```
-    *not sure how to use npm? Read [this](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).*
-2. Copy [.eslintrc.json](./.eslintrc.json) and [.babelrc](./.babelrc) to the root directory of your project.
-3. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-    - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-4. Run `npx eslint "**/*.{js,jsx}"` on the root of your directory of your project.
-5. Fix linter errors.
-6. **IMPORTANT NOTE**: feel free to research [auto-correct options for Eslint](https://eslint.org/docs/latest/user-guide/command-line-interface#fixing-problems) if you get a flood of errors but keep in mind that correcting style errors manually will help you to make a habit of writing a clean code!
+### Prerequisites
 
-### Stylelint
+In order to run this project you need:
 
-1. Run
+```sh
+ npm install node
+```
 
-   ```
-   npm install --save-dev stylelint@13.x stylelint-scss@3.x stylelint-config-standard@21.x stylelint-csstree-validator@1.x
-   ```
+### Setup
 
-   *not sure how to use npm? Read [this](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).*
+Clone this repository to your desired folder:
 
-2. Copy [.stylelintrc.json](./.stylelintrc.json) to the root directory of your project.
-3. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-   - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-4. Run `npx stylelint "**/*.{css,scss}"` on the root of your directory of your project.
-5. Fix linter errors.
-6. **IMPORTANT NOTE**: feel free to research [auto-correct options for Stylelint](https://stylelint.io/user-guide/usage/options) if you get a flood of errors but keep in mind that correcting style errors manually will help you to make a habit of writing a clean code!
+```sh
+  git clone https://github.com/EyasuTeshome/final-capstone-project-front-end
+```
 
-## Test/Deployment Actions
+### Install
 
-Feel free to add your own deployment actions which can run your tests and deploy to Heroku.
+Install this project with:
 
-Make sure that you do not modify the [`.github/workflows/linters.yml`](.github/workflows/linters.yml) but that you create a separe GitHub Action workflow file for that.
+```sh
+  cd final-capstone-project-front-end
+  npm install/npm install --legacy-peer-deps
+```
+
+### Usage
+
+To run the project, execute the following command:
+
+```sh
+  npm run start
+```
+<!--
+Example:
+
+```sh
+
+```
+ -->
+
+<!-- AUTHORS -->
+
+## 👥 Authors
+
+👤 **Tinaye H Tsinakwadi**
+
+- GitHub: [@tinatsina](https://github.com/tinatsina)
+- LinkedIn: [@tinayetsina](https://www.linkedin.com/in/tinayetsina/)
+
+👤**Athena Kuitsouc Danwa**
+
+<!-- Please put your details here -->
+<!-- FUTURE FEATURES -->
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+Feel free to check the [issues page](https://github.com/EyasuTeshome/final-capstone-project-front-end/issues).
+
+<!-- SUPPORT -->
+
+## ⭐️ Show your support
+
+If you like this project please consider giving us a star.
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## 🙏 Acknowledgments
+
+I would like to thank...
+
+- [Creative Commons](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign) for design
+
+<!-- FAQ (optional) -->
+
+## 📝 License
+
+This project is [MIT](./MIT.md) licensed.
