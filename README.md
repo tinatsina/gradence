@@ -1,65 +1,99 @@
-# React and Redux
+# 📖 Gradence Frontend
 
-If you are not familiar with linters and GitHub Actions, read [root level README](../README.md).
+This is the fronted development repository for Gradence. An advanced Exam creation tool that allows teachers and exam setters to create an exam once, and get advanced randomization. Gradence goes beyond just mixing numbers but provides multiple methods for exam makers to scramble and make sure each exam is unique.
 
-## Set-up GitHub Actions
+## 🛠 Built With
 
-This GitHub Action is going to run [ESLint](https://eslint.org/) and [Stylelint](https://stylelint.io/) to help you find style issues.
+### Tech Stack
 
-[Stylelint](https://stylelint.io/) is a linter for your stylesheets that helps you avoid errors and enforce conventions.
+- React Frontend
+- Style Linter
+- ES Linter
+- Markdown Linter
+- JavaScript
 
-[ESLint](https://eslint.org/) is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code, with the goal of making code more consistent and avoiding bugs.
+### Key Features
 
-Please do the following **steps in this order**:
+- **Create, Read, and Update Cars**
+- **Book Cars**
+- **Authentication with devise**
 
-1. In the first commit of your feature branch create a `.github/workflows` folder and add a copy of [`.github/workflows/linters.yml`](.github/workflows/linters.yml) to that folder.
-    - **Remember** to use the file linked above
-    - **Remember** that `.github` folder starts with a dot.
-2. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-    - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-3. When you open your first pull request you should see the result of the GitHub Actions:
+## 🚀 Live Demo
 
-![gh actions checks](../assets/images/gh-actions-eslint-stylelint-checks.png)
+- [Live Demo Link](https://google.com/)
+- [API URL](https://bing.com)
 
-Click on the `Details` link to see the full output and the errors that need to be fixed:
+<!-- GETTING STARTED -->
 
-![gh actions failing checks](../assets/images/gh-actions-html-css-failing-checks.png)
+## 💻 Getting Started
 
-## Set-up linters in your local env
+To get a local copy up and running, follow these steps.
 
-### ESLint
+### Prerequisites
 
-1. Run 
-    ```
-    npm install --save-dev eslint@7.x eslint-config-airbnb@18.x eslint-plugin-import@2.x eslint-plugin-jsx-a11y@6.x eslint-plugin-react@7.x eslint-plugin-react-hooks@4.x @babel/eslint-parser@7.x @babel/core@7.x  @babel/plugin-syntax-jsx@7.x  @babel/preset-react@7.x @babel/preset-react@7.x
-    ```
-    *not sure how to use npm? Read [this](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).*
-2. Copy [.eslintrc.json](./.eslintrc.json) and [.babelrc](./.babelrc) to the root directory of your project.
-3. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-    - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-4. Run `npx eslint "**/*.{js,jsx}"` on the root of your directory of your project.
-5. Fix linter errors.
-6. **IMPORTANT NOTE**: feel free to research [auto-correct options for Eslint](https://eslint.org/docs/latest/user-guide/command-line-interface#fixing-problems) if you get a flood of errors but keep in mind that correcting style errors manually will help you to make a habit of writing a clean code!
+In order to run this project you need:
 
-### Stylelint
+```sh
+ npm install node
+```
 
-1. Run
+### Setup
 
-   ```
-   npm install --save-dev stylelint@13.x stylelint-scss@3.x stylelint-config-standard@21.x stylelint-csstree-validator@1.x
-   ```
+Clone this repository to your desired folder:
 
-   *not sure how to use npm? Read [this](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).*
+```sh
+  git clone [this_repo]
+```
 
-2. Copy [.stylelintrc.json](./.stylelintrc.json) to the root directory of your project.
-3. **Do not make any changes in config files - they represent style guidelines that you share with your team - which is a group of all Microverse students.**
-   - If you think that change is necessary - open a [Pull Request in this repository](../README.md#contributing) and let your code reviewer know about it.
-4. Run `npx stylelint "**/*.{css,scss}"` on the root of your directory of your project.
-5. Fix linter errors.
-6. **IMPORTANT NOTE**: feel free to research [auto-correct options for Stylelint](https://stylelint.io/user-guide/usage/options) if you get a flood of errors but keep in mind that correcting style errors manually will help you to make a habit of writing a clean code!
+### Install
 
-## Test/Deployment Actions
+Install this project with:
 
-Feel free to add your own deployment actions which can run your tests and deploy to Heroku.
+```sh
+  cd gradence
+  npm install --legacy-peer-deps
+```
 
-Make sure that you do not modify the [`.github/workflows/linters.yml`](.github/workflows/linters.yml) but that you create a separe GitHub Action workflow file for that.
+### Usage
+
+To run the project, execute the following command:
+
+```sh
+  npm run start
+```
+
+## 👥 Authors
+
+👤 **Tinaye H Tsinakwadi**
+
+- GitHub: [@tinatsina](https://github.com/tinatsina)
+- LinkedIn: [@tinayetsina](https://www.linkedin.com/in/tinayetsina/)
+
+👤**Athena Kuitsouc Danwa**
+
+<!-- Please put your details here -->
+<!-- FUTURE FEATURES -->
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
+
+<!-- SUPPORT -->
+
+## ⭐️ Show your support
+
+If you like this project please consider giving us a star.
+
+<!-- ACKNOWLEDGEMENTS -->
+
+## 🙏 Acknowledgments
+
+I would like to thank...
+
+- [Spring](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign) the resources
+
+<!-- FAQ (optional) -->
+
+## 📝 License
+
+This project is [Mulan PSL v2](./LICENSE) licensed.
