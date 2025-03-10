@@ -1,12 +1,16 @@
-# 📖 final-capstone-project-front-end
+# 📖 Gradence Frontend
 
-The project is based on an app to book an appointment to try a Car. User see all cars in database and is able to book and try one. User can add and delete a car if user role is admin
+This is the fronted development repository for Gradence. An advanced Exam creation tool that allows teachers and exam setters to create an exam once, and get advanced randomization. Gradence goes beyond just mixing numbers but provides multiple methods for exam makers to scramble and make sure each exam is unique.
 
 ## 🛠 Built With
 
 ### Tech Stack
 
-<!-- Features -->
+- React Frontend
+- Style Linter
+- ES Linter
+- Markdown Linter
+- JavaScript
 
 ### Key Features
 
@@ -14,12 +18,10 @@ The project is based on an app to book an appointment to try a Car. User see all
 - **Book Cars**
 - **Authentication with devise**
 
-<!-- LIVE DEMO -->
-
 ## 🚀 Live Demo
 
-- [Live Demo Link](https://reserve-car.onrender.com/)
-- [API URL](https://microverse-final-capstone-backend.onrender.com)
+- [Live Demo Link](https://google.com/)
+- [API URL](https://bing.com)
 
 <!-- GETTING STARTED -->
 
@@ -40,7 +42,7 @@ In order to run this project you need:
 Clone this repository to your desired folder:
 
 ```sh
-  git clone https://github.com/EyasuTeshome/final-capstone-project-front-end
+  git clone [this_repo]
 ```
 
 ### Install
@@ -48,8 +50,8 @@ Clone this repository to your desired folder:
 Install this project with:
 
 ```sh
-  cd final-capstone-project-front-end
-  npm install/npm install --legacy-peer-deps
+  cd gradence
+  npm install --legacy-peer-deps
 ```
 
 ### Usage
@@ -59,15 +61,6 @@ To run the project, execute the following command:
 ```sh
   npm run start
 ```
-<!--
-Example:
-
-```sh
-
-```
- -->
-
-<!-- AUTHORS -->
 
 ## 👥 Authors
 
@@ -85,8 +78,6 @@ Example:
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](https://github.com/EyasuTeshome/final-capstone-project-front-end/issues).
-
 <!-- SUPPORT -->
 
 ## ⭐️ Show your support
@@ -99,10 +90,10 @@ If you like this project please consider giving us a star.
 
 I would like to thank...
 
-- [Creative Commons](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign) for design
+- [Spring](https://www.behance.net/gallery/26425031/Vespa-Responsive-Redesign) the resources
 
 <!-- FAQ (optional) -->
 
 ## 📝 License
 
-This project is [MIT](./MIT.md) licensed.
+This project is [Mulan PSL v2](./LICENSE) licensed.
