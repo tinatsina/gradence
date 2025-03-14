@@ -1,56 +1,41 @@
 /* eslint-disable linebreak-style */
 import { Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
+import {
+  AppstoreAddOutlined, BookOutlined,
+  SafetyOutlined, VideoCameraAddOutlined,
+} from '@ant-design/icons';
 import './App.css';
+import ExamCard from './components/examcard/ExamCard';
 
 const items = [
   {
-    label: 'Navigation One',
+    label: 'Gradence Logo',
+    key: 'logo',
+    icon: <SafetyOutlined />,
+  },
+  {
+    label: 'Exam Central',
     key: 'mail',
-    icon: <MailOutlined />,
+    icon: <AppstoreAddOutlined />,
   },
   {
-    label: 'Navigation Two',
+    label: 'Question Design',
     key: 'app',
-    icon: <AppstoreOutlined />,
-    disabled: true,
+    icon: <BookOutlined />,
   },
   {
-    label: 'Navigation Three - Submenu',
+    label: 'Studio',
     key: 'SubMenu',
-    icon: <SettingOutlined />,
-    children: [
-      {
-        type: 'group',
-        label: 'Item 1',
-        children: [
-          { label: 'Option 1', key: 'setting:1' },
-          { label: 'Option 2', key: 'setting:2' },
-        ],
-      },
-      {
-        type: 'group',
-        label: 'Item 2',
-        children: [
-          { label: 'Option 3', key: 'setting:3' },
-          { label: 'Option 4', key: 'setting:4' },
-        ],
-      },
-    ],
-  },
-  {
-    key: 'alipay',
-    label: (
-      <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-        Navigation Four - Link
-      </a>
-    ),
+    icon: <VideoCameraAddOutlined />,
   },
 ];
 
 function App() {
   return (
-    <Menu mode="horizontal" items={items} className="navbar" />
+    <>
+      <Menu mode="horizontal" items={items} className="navbar" />
+      <ExamCard examName="Linear Algebra" creationDate="12-03-1996" />
+    </>
   );
 }
 
