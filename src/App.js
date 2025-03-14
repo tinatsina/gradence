@@ -5,7 +5,7 @@ import {
   SafetyOutlined, VideoCameraAddOutlined,
 } from '@ant-design/icons';
 import './App.css';
-import ExamCard from './components/examcard/ExamCard';
+import AppRouter from './AppRouter';
 
 const items = [
   {
@@ -14,7 +14,7 @@ const items = [
     icon: <SafetyOutlined />,
   },
   {
-    label: 'Exam Central',
+    label: (<a href="\exam">Helllo</a>),
     key: 'mail',
     icon: <AppstoreAddOutlined />,
   },
@@ -34,7 +34,7 @@ function App() {
   return (
     <>
       <Menu mode="horizontal" items={items} className="navbar" />
-      <ExamCard examName="Linear Algebra" creationDate="12-03-1996" />
+      <AppRouter />
     </>
   );
 }
