@@ -71,8 +71,8 @@ To run the project, execute the following command:
 
 👤**Athena Kuitsouc Danwa**
 
-<!-- Please put your details here -->
-<!-- FUTURE FEATURES -->
+- GitHub: [@Athenaelle](https://github.com/athenaelle)
+- LinkedIn: [Athena Danwa](https://www.linkedin.com/in/AthenaDanwa)
 
 ## 🤝 Contributing
 
