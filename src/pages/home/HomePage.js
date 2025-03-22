@@ -1,16 +1,11 @@
 import stlyes from './HomePage.module.css';
+import NavBar from '../../components/NavBar/NavBar';
 
 const HomePage = () => (
-  <div className={stlyes.homepage}>
-    <h1>HomePage</h1>
-    <h2>This is the HomePage</h2>
-    <ul>
-      <li>First List Item</li>
-      <li>First List Item</li>
-      <li>First List Item</li>
-      <li>First List Item</li>
-    </ul>
-  </div>
+  <>
+    <NavBar />
+    <h1 className={stlyes.homepage}>HomePage</h1>
+  </>
 );
 
 export default HomePage;

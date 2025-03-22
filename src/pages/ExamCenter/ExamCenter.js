@@ -1,9 +1,10 @@
 import './ExamCenter.module.css';
+import NavBar from '../../components/NavBar/NavBar';
 
 const ExamCenter = () => (
-  <div className="homepage">
-    <h1>HomePage</h1>
-    <h2>This is the HomePage</h2>
+  <div>
+    <NavBar />
+    <h2>Exam Center</h2>
   </div>
 );
 

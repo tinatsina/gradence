@@ -1,7 +1,9 @@
 import './ControlPanel.module.css';
+import NavBar from '../../components/NavBar/NavBar';
 
 const ControlPanel = () => (
-  <div className="homepage">
+  <div>
+    <NavBar />
     <h1>Control Panel</h1>
     <h2>This is the HomePage</h2>
   </div>
