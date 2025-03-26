@@ -1,11 +1,14 @@
-import './ExamCard.module.css';
 import PropTypes from 'prop-types';
+import { Card } from 'antd';
+import styles from './ExamCard.module.css';
 
 const ExamCard = ({ examName, creationDate }) => (
-  <div className="div">
-    <h1>{examName}</h1>
-    <h2>{creationDate}</h2>
-  </div>
+  <>
+    <Card title={examName} variant="borderless" className={styles.card} hoverable="true">
+      <p>Card content</p>
+      <p>{creationDate}</p>
+    </Card>
+  </>
 );
 
 ExamCard.propTypes = {
