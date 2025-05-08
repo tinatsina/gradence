@@ -1,3 +1,3 @@
-const SignUp = () => (<h1>Hello World</h1>);
+const SignUp = () => (<h1>Register Yourself Here</h1>);
 
 export default SignUp;
