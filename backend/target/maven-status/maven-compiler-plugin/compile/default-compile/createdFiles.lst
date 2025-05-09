@@ -1,0 +1,10 @@
+com/gradence/ga/repository/ExamRepository.class
+com/gradence/ga/repository/QuestionRepository.class
+com/gradence/ga/controller/ExamController.class
+com/gradence/ga/model/User.class
+com/gradence/ga/controller/UserController.class
+com/gradence/ga/GradenceApplication.class
+com/gradence/ga/model/Question.class
+com/gradence/ga/repository/UserRepository.class
+com/gradence/ga/model/Exam.class
+com/gradence/ga/controller/QuestionController.class
