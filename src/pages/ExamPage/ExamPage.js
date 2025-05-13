@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { List, Card, Button, Input, Modal, Form, Radio, Typography } from 'antd';
+import {
+  List, Card, Button, Input, Modal, Form, Radio, Typography,
+} from 'antd';
 
 const { Title, Text } = Typography;
 
@@ -54,13 +56,10 @@ const ExamPage = () => {
       text,
     }));
 
-    setQuestions((prevQuestions) =>
-      prevQuestions.map((q) =>
-        q.questionId === editingQuestion.questionId
-          ? { ...q, ...values, options: updatedOptions }
-          : q
-      )
-    );
+    // eslint-disable-next-line max-len
+    setQuestions((prevQuestions) => prevQuestions.map((q) => (q.questionId === editingQuestion.questionId
+      ? { ...q, ...values, options: updatedOptions }
+      : q)));
     setIsModalVisible(false);
     setEditingQuestion(null);
   };
@@ -76,12 +75,12 @@ const ExamPage = () => {
         renderItem={(item) => (
           <List.Item>
             <Card
-              title={
+              title={(
                 <Text strong style={{ fontSize: '16px' }}>
                   {item.questionText}
                 </Text>
-              }
-              extra={
+              )}
+              extra={(
                 <>
                   <Button type="link" onClick={() => handleEdit(item)}>
                     Edit
@@ -90,17 +89,21 @@ const ExamPage = () => {
                     Delete
                   </Button>
                 </>
-              }
+              )}
               style={{
                 borderRadius: '8px',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
               }}
             >
               <p>
-                <Text strong>Topic:</Text> {item.topic}
+                <Text strong>Topic:</Text>
+                {' '}
+                {item.topic}
               </p>
               <p>
-                <Text strong>Difficulty:</Text> {item.difficulty}
+                <Text strong>Difficulty:</Text>
+                {' '}
+                {item.difficulty}
               </p>
               <p>
                 <Text strong>Options:</Text>
@@ -109,16 +112,23 @@ const ExamPage = () => {
                 {item.options.map((option) => (
                   <li key={option.id} style={{ marginBottom: '5px' }}>
                     <Text>
-                      <Text strong>{option.id}:</Text> {option.text}
+                      <Text strong>
+                        {option.id}
+                        :
+                      </Text>
+                      {option.text}
                     </Text>
                   </li>
                 ))}
               </ul>
               <p>
-                <Text strong>Correct Answer:</Text> {item.correctAnswerId}
+                <Text strong>Correct Answer:</Text>
+                {' '}
+                {item.correctAnswerId}
               </p>
               <p>
-                <Text strong>Points:</Text> {item.points}
+                <Text strong>Points:</Text>
+                {item.points}
               </p>
             </Card>
           </List.Item>

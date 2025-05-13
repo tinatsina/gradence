@@ -4,7 +4,7 @@ import styles from './ExamCard.module.css';
 
 const ExamCard = ({ title, courseCode, timeLimitMinutes }) => (
   <>
-    <Card title={title} variant="borderless" className={styles.card} hoverable={true}>
+    <Card title={title} variant="borderless" className={styles.card} hoverable>
       <p>
         Course Code:
         {courseCode}
