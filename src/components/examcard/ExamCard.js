@@ -2,18 +2,26 @@ import PropTypes from 'prop-types';
 import { Card } from 'antd';
 import styles from './ExamCard.module.css';
 
-const ExamCard = ({ examName, creationDate }) => (
+const ExamCard = ({ title, courseCode, timeLimitMinutes }) => (
   <>
-    <Card title={examName} variant="borderless" className={styles.card} hoverable="true">
-      <p>Card content</p>
-      <p>{creationDate}</p>
+    <Card title={title} variant="borderless" className={styles.card} hoverable="true">
+      <p>
+        Course Code:
+        {courseCode}
+      </p>
+      <p>
+        Time Limit:
+        {timeLimitMinutes}
+        minutes
+      </p>
     </Card>
   </>
 );
 
 ExamCard.propTypes = {
-  examName: PropTypes.string.isRequired,
-  creationDate: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  courseCode: PropTypes.string.isRequired,
+  timeLimitMinutes: PropTypes.number.isRequired,
 };
 
 export default ExamCard;
