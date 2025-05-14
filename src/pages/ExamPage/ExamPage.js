@@ -40,6 +40,7 @@ const ExamPage = () => {
   const [questions, setQuestions] = useState(initialQuestions);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingQuestion, setEditingQuestion] = useState(null);
+  const [isAddModalVisible, setIsAddModalVisible] = useState(false);
 
   const handleEdit = (question) => {
     setEditingQuestion(question);
@@ -208,6 +209,100 @@ const ExamPage = () => {
             </Button>
           </Form>
         )}
+      </Modal>
+
+      {/* Add Question Section */}
+      <Button
+        type="dashed"
+        style={{ marginTop: 32, width: '100%' }}
+        onClick={() => setIsAddModalVisible(true)}
+      >
+        + Add New Question
+      </Button>
+      <Modal
+        title="Add New Question"
+        visible={isAddModalVisible}
+        onCancel={() => setIsAddModalVisible(false)}
+        footer={null}
+      >
+        <Form
+          initialValues={{
+            options: ['', '', '', ''],
+            difficulty: 'Easy',
+            points: 1,
+          }}
+          onFinish={(values) => {
+            const newQuestion = {
+              questionId: `${values.topic?.slice(0, 3).toUpperCase() || 'NEW'}${Math.floor(Math.random() * 1000)}`,
+              ...values,
+              options: values.options.map((text, index) => ({
+                id: String.fromCharCode(65 + index),
+                text,
+              })),
+            };
+            setQuestions([...questions, newQuestion]);
+            setIsAddModalVisible(false);
+          }}
+          layout="vertical"
+        >
+          <Form.Item
+            label="Question Text"
+            name="questionText"
+            rules={[{ required: true, message: 'Please input the question text!' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Topic"
+            name="topic"
+            rules={[{ required: true, message: 'Please input the topic!' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Difficulty"
+            name="difficulty"
+            rules={[{ required: true, message: 'Please input the difficulty!' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="Points"
+            name="points"
+            rules={[{ required: true, message: 'Please input the points!' }]}
+          >
+            <Input type="number" />
+          </Form.Item>
+          <Form.Item label="Options" name="options">
+            <Input.Group>
+              {[0, 1, 2, 3].map((index) => (
+                <Form.Item
+                  key={index}
+                  name={['options', index]}
+                  rules={[{ required: true, message: `Option ${String.fromCharCode(65 + index)} is required!` }]}
+                >
+                  <Input placeholder={`Option ${String.fromCharCode(65 + index)}`} />
+                </Form.Item>
+              ))}
+            </Input.Group>
+          </Form.Item>
+          <Form.Item
+            label="Correct Answer"
+            name="correctAnswerId"
+            rules={[{ required: true, message: 'Please select the correct answer!' }]}
+          >
+            <Radio.Group>
+              {['A', 'B', 'C', 'D'].map((id) => (
+                <Radio key={id} value={id}>
+                  {id}
+                </Radio>
+              ))}
+            </Radio.Group>
+          </Form.Item>
+          <Button type="primary" htmlType="submit" block>
+            Add Question
+          </Button>
+        </Form>
       </Modal>
     </div>
   );
