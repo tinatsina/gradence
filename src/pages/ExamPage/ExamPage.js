@@ -3,6 +3,11 @@ import {
   List, Card, Button, Input, Modal, Form, Radio, Typography,
 } from 'antd';
 import { PrinterOutlined } from '@ant-design/icons';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import pdfMake from 'pdfmake/build/pdfmake';
+
+// eslint-disable-next-line import/no-extraneous-dependencies, no-unused-vars
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 const { Title, Text } = Typography;
 
@@ -37,8 +42,40 @@ const initialQuestions = [
   },
 ];
 
-const ExamPage = () => {
-  const [questions, setQuestions] = useState(initialQuestions);
+function generateExamPdf(questions) {
+  const content = [
+    { text: 'Exam Questions', style: 'header', margin: [0, 0, 0, 20] },
+    ...questions.map((q, idx) => ({
+      stack: [
+        { text: `${idx + 1}. ${q.questionText}`, style: 'question' },
+        {
+          ul: q.options.map((opt) => `${opt.id}. ${opt.text}`),
+          margin: [0, 4, 0, 4],
+        },
+        { text: `Points: ${q.points}`, style: 'points', margin: [0, 0, 0, 10] },
+      ],
+      margin: [0, 0, 0, 10],
+    })),
+  ];
+
+  const docDefinition = {
+    content,
+    styles: {
+      header: { fontSize: 22, bold: true, alignment: 'center' },
+      question: { fontSize: 14, bold: true, margin: [0, 8, 0, 4] },
+      points: { fontSize: 12, italics: true, color: '#888' },
+    },
+    defaultStyle: {
+      fontSize: 12,
+    },
+    pageMargins: [40, 60, 40, 60],
+  };
+
+  pdfMake.createPdf(docDefinition).open();
+}
+
+// eslint-disable-next-line react/prop-types
+const ExamPage = ({ questions, setQuestions }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingQuestion, setEditingQuestion] = useState(null);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
@@ -49,6 +86,7 @@ const ExamPage = () => {
   };
 
   const handleDelete = (questionId) => {
+    // eslint-disable-next-line react/prop-types
     setQuestions(questions.filter((q) => q.questionId !== questionId));
   };
 
@@ -309,42 +347,41 @@ const ExamPage = () => {
   );
 };
 
-const floatingButtonStyle = {
-  position: 'fixed',
-  bottom: 32,
-  right: 32,
-  zIndex: 1000,
-};
-
-function FloatingPrintButton() {
+// eslint-disable-next-line react/prop-types
+function FloatingPrintButton({ questions }) {
   return (
     <Button
       type="primary"
       shape="circle"
-      icon={
-        <PrinterOutlined style={{ fontSize: 40 }} /> // Make the icon much bigger
-      }
+      icon={<PrinterOutlined style={{ fontSize: 40 }} />}
       size="large"
       style={{
-        ...floatingButtonStyle,
+        position: 'fixed',
+        bottom: 32,
+        right: 32,
+        zIndex: 1000,
         width: 72,
         height: 72,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
       }}
-      // onClick={() => { /* Print functionality will go here */ }}
+      onClick={() => generateExamPdf(questions)}
       title="Print Exam"
     />
   );
 }
 
 // Wrap ExamPage with the floating button
-const ExamPageWithPrint = () => (
-  <>
-    <ExamPage />
-    <FloatingPrintButton />
-  </>
-);
+const ExamPageWithPrint = () => {
+  const [questions, setQuestions] = useState(initialQuestions);
+
+  return (
+    <>
+      <ExamPage questions={questions} setQuestions={setQuestions} />
+      <FloatingPrintButton questions={questions} />
+    </>
+  );
+};
 
 export default ExamPageWithPrint;
