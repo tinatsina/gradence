@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   List, Card, Button, Input, Modal, Form, Radio, Typography,
 } from 'antd';
+import { PrinterOutlined } from '@ant-design/icons';
 
 const { Title, Text } = Typography;
 
@@ -308,4 +309,42 @@ const ExamPage = () => {
   );
 };
 
-export default ExamPage;
+const floatingButtonStyle = {
+  position: 'fixed',
+  bottom: 32,
+  right: 32,
+  zIndex: 1000,
+};
+
+function FloatingPrintButton() {
+  return (
+    <Button
+      type="primary"
+      shape="circle"
+      icon={
+        <PrinterOutlined style={{ fontSize: 40 }} /> // Make the icon much bigger
+      }
+      size="large"
+      style={{
+        ...floatingButtonStyle,
+        width: 72,
+        height: 72,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      // onClick={() => { /* Print functionality will go here */ }}
+      title="Print Exam"
+    />
+  );
+}
+
+// Wrap ExamPage with the floating button
+const ExamPageWithPrint = () => (
+  <>
+    <ExamPage />
+    <FloatingPrintButton />
+  </>
+);
+
+export default ExamPageWithPrint;
