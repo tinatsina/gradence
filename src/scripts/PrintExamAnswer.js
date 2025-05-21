@@ -13,5 +13,5 @@ const pdf = pdfmake.createPdf(docDefinition);
 pdf.write('pdfs/basics.pdf').then(() => {
   console.log(new Date() - now);
 }, (err) => {
-	console.error(err);
+  console.error(err);
 });
