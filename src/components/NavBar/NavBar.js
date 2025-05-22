@@ -23,7 +23,8 @@ const items = [
   },
 ];
 const NavBar = () => {
-  const [current, setCurrent] = useState('mail');
+  // Set initial state to 'exam_center' so Exam Center is selected by default
+  const [current, setCurrent] = useState('exam_center');
 
   const onClick = (e) => {
     setCurrent(e.key);

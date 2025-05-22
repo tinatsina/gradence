@@ -10,15 +10,20 @@ const LoginPage = () => {
 
   const onFinish = async (values) => {
     try {
-      console.log('Button clicked');
+      // Prepare the body for the new endpoint
+      const body = {
+        email: values.username, // Assuming username input is actually email
+        password: values.password,
+      };
+
       const response = await fetch(
-        'https://corsproxy.io/?https://gradence-backend-fork.onrender.com/auth/login',
+        'https://x8ki-letl-twmt.n7.xano.io/api:7oNfGATu/auth/login',
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(values),
+          body: JSON.stringify(body),
         },
       );
 
@@ -27,8 +32,8 @@ const LoginPage = () => {
       }
 
       const data = await response.json();
-      // Save token to localStorage for later access
-      localStorage.setItem('authToken', data.token);
+      // Save authToken to localStorage for later access
+      localStorage.setItem('authToken', data.authToken);
       // Redirect to home page
       navigate('/home');
     } catch (error) {
@@ -62,12 +67,13 @@ const LoginPage = () => {
       autoComplete="off"
     >
       <Form.Item
-        label="Username"
+        label="Email"
         name="username"
         rules={[
           {
             required: true,
-            message: 'Please input your username!',
+            message: 'Please input your email!',
+            type: 'email',
           },
         ]}
       >
