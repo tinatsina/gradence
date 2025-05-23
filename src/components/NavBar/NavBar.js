@@ -13,7 +13,7 @@ const items = [
     icon: <MailOutlined />,
   },
   {
-    label: 'Question Panel',
+    label: 'User Panel',
     key: 'question_panel',
     icon: <AppstoreOutlined />,
   },
