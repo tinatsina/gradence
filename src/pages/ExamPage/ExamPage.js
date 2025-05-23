@@ -10,6 +10,7 @@ import { PrinterOutlined, EditOutlined, DeleteOutlined, PlusOutlined } from '@an
 import pdfMake from 'pdfmake/build/pdfmake';
 // eslint-disable-next-line import/no-extraneous-dependencies, no-unused-vars
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import getRandomQuote from '../../scripts/Quotes';
 
 const { Title, Text } = Typography;
 
@@ -44,10 +45,51 @@ const initialQuestions = [
   },
 ];
 
-function generateExamPdf(questions) {
+// Helper to shuffle an array (Fisher-Yates)
+function shuffleArray(array) {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// Update generateExamPdf to randomize options and add answers page
+async function generateExamPdf(questions) {
+  let quote = '';
+  try {
+    quote = getRandomQuote();
+  } catch (e) {
+    quote = '“Education is the most powerful weapon which you can use to change the world.”';
+  }
+
+  // Randomize the order of questions
+  const shuffledQuestions = shuffleArray(questions);
+
+  // Randomize options for each question and keep track of new correct answer IDs
+  const randomizedQuestions = shuffledQuestions.map((q) => {
+    const shuffledOptions = shuffleArray(q.options);
+    const newCorrect = shuffledOptions.find((opt) => opt.id === q.correctAnswerId);
+    const newCorrectIndex = shuffledOptions.indexOf(newCorrect);
+    // Assign new IDs (A, B, C, D) after shuffling
+    const relabeledOptions = shuffledOptions.map((opt, idx) => ({
+      ...opt,
+      id: String.fromCharCode(65 + idx),
+    }));
+    // Find the new correct answer ID after relabeling
+    const newCorrectAnswerId = relabeledOptions[newCorrectIndex].id;
+    return {
+      ...q,
+      options: relabeledOptions,
+      correctAnswerId: newCorrectAnswerId,
+      originalCorrectText: newCorrect.text,
+    };
+  });
+
   const content = [
     { text: 'Exam Questions', style: 'header', margin: [0, 0, 0, 20] },
-    ...questions.map((q, idx) => ({
+    ...randomizedQuestions.map((q, idx) => ({
       stack: [
         { text: `${idx + 1}. ${q.questionText}`, style: 'question' },
         {
@@ -58,6 +100,14 @@ function generateExamPdf(questions) {
       ],
       margin: [0, 0, 0, 10],
     })),
+    // Add answers page
+    { text: '', pageBreak: 'after' },
+    { text: 'Answers', style: 'header', margin: [0, 0, 0, 20] },
+    ...randomizedQuestions.map((q, idx) => ({
+      text: `${idx + 1}. ${q.correctAnswerId} (${q.originalCorrectText})`,
+      margin: [0, 0, 0, 8],
+      style: 'answer',
+    })),
   ];
 
   const docDefinition = {
@@ -66,11 +116,22 @@ function generateExamPdf(questions) {
       header: { fontSize: 22, bold: true, alignment: 'center' },
       question: { fontSize: 14, bold: true, margin: [0, 8, 0, 4] },
       points: { fontSize: 12, italics: true, color: '#888' },
+      footerQuote: { fontSize: 10, italics: true, alignment: 'center', color: '#888' },
+      answer: { fontSize: 13, color: '#0a0a0a' },
     },
     defaultStyle: {
       fontSize: 12,
     },
     pageMargins: [40, 60, 40, 60],
+    // eslint-disable-next-line no-unused-vars
+    footer(currentPage, pageCount) {
+      return {
+        columns: [
+          { fontSize: 15, text: `"${quote}"`, style: 'footerQuote', width: '100%' },
+        ],
+        margin: [40, 0, 40, 20],
+      };
+    },
   };
 
   pdfMake.createPdf(docDefinition).open();
@@ -112,6 +173,7 @@ const ExamPage = ({ questions, setQuestions }) => {
       case 'easy': return 'green';
       case 'medium': return 'gold';
       case 'hard': return 'red';
+      case 'dark_souls': return 'black';
       default: return 'blue';
     }
   };
@@ -353,7 +415,12 @@ const ExamPage = ({ questions, setQuestions }) => {
             name="difficulty"
             rules={[{ required: true, message: 'Please input the difficulty!' }]}
           >
-            <Input />
+            <Radio.Group>
+              <Radio value="Easy">Easy</Radio>
+              <Radio value="Medium">Medium</Radio>
+              <Radio value="Hard">Hard</Radio>
+              <Radio value="Dark_Souls">Dark Souls</Radio>
+            </Radio.Group>
           </Form.Item>
           <Form.Item
             label="Points"
