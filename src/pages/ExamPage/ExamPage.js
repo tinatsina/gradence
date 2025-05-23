@@ -1,11 +1,13 @@
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable object-curly-newline */
 import React, { useState } from 'react';
 import {
-  List, Card, Button, Input, Modal, Form, Radio, Typography,
+  List, Card, Button, Input, Modal, Form, Radio, Typography, Tag, Space,
 } from 'antd';
-import { PrinterOutlined } from '@ant-design/icons';
+import { PrinterOutlined, EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import pdfMake from 'pdfmake/build/pdfmake';
-
 // eslint-disable-next-line import/no-extraneous-dependencies, no-unused-vars
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
@@ -104,81 +106,131 @@ const ExamPage = ({ questions, setQuestions }) => {
     setEditingQuestion(null);
   };
 
+  // Tag color by difficulty
+  const getDifficultyColor = (difficulty) => {
+    switch ((difficulty || '').toLowerCase()) {
+      case 'easy': return 'green';
+      case 'medium': return 'gold';
+      case 'hard': return 'red';
+      default: return 'blue';
+    }
+  };
+
   return (
-    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
-      <Title level={2} style={{ textAlign: 'center', marginBottom: '20px' }}>
-        Exam Questions
-      </Title>
-      <List
-        grid={{ gutter: 16, column: 1 }}
-        dataSource={questions}
-        renderItem={(item) => (
-          <List.Item>
-            <Card
-              title={(
-                <Text strong style={{ fontSize: '16px' }}>
-                  {item.questionText}
-                </Text>
-              )}
-              extra={(
-                <>
-                  <Button type="link" onClick={() => handleEdit(item)}>
-                    Edit
-                  </Button>
-                  <Button type="link" danger onClick={() => handleDelete(item.questionId)}>
-                    Delete
-                  </Button>
-                </>
-              )}
-              style={{
-                borderRadius: '8px',
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              <p>
-                <Text strong>Topic:</Text>
-                {' '}
-                {item.topic}
-              </p>
-              <p>
-                <Text strong>Difficulty:</Text>
-                {' '}
-                {item.difficulty}
-              </p>
-              <p>
-                <Text strong>Options:</Text>
-              </p>
-              <ul style={{ paddingLeft: '20px' }}>
-                {item.options.map((option) => (
-                  <li key={option.id} style={{ marginBottom: '5px' }}>
-                    <Text>
-                      <Text strong>
-                        {option.id}
-                        :
-                      </Text>
-                      {option.text}
+    <div
+      style={{
+        padding: '32px 0',
+        maxWidth: '900px',
+        margin: '0 auto',
+        minHeight: '100vh',
+        background: 'linear-gradient(135deg, #f0fdfa 0%, #e0e7ff 100%)',
+      }}
+    >
+      <Card
+        style={{
+          borderRadius: 18,
+          boxShadow: '0 8px 32px rgba(30,41,59,0.10)',
+          background: 'rgba(255,255,255,0.97)',
+          padding: 24,
+          marginBottom: 32,
+        }}
+        bodyStyle={{ padding: 0 }}
+      >
+        <Title level={2} style={{ textAlign: 'center', marginBottom: 24, color: '#1e293b' }}>
+          Exam Questions
+        </Title>
+        <List
+          grid={{ gutter: 20, column: 1 }}
+          dataSource={questions}
+          renderItem={(item, idx) => (
+            <List.Item>
+              <Card
+                size="small"
+                style={{
+                  borderRadius: 12,
+                  boxShadow: '0 2px 12px rgba(22,119,255,0.08)',
+                  marginBottom: 0,
+                  background: 'linear-gradient(120deg, #f0fdfa 80%, #e0e7ff 100%)',
+                  border: 'none',
+                  padding: 0,
+                }}
+                bodyStyle={{ padding: '16px 20px' }}
+                title={(
+                  <Space direction="horizontal" size="middle">
+                    <Text strong style={{ fontSize: 15, color: '#1e293b' }}>
+                      {idx + 1}. {item.questionText}
                     </Text>
-                  </li>
-                ))}
-              </ul>
-              <p>
-                <Text strong>Correct Answer:</Text>
-                {' '}
-                {item.correctAnswerId}
-              </p>
-              <p>
-                <Text strong>Points:</Text>
-                {item.points}
-              </p>
-            </Card>
-          </List.Item>
-        )}
-      />
+                    <Tag color="blue">{item.topic}</Tag>
+                    <Tag color={getDifficultyColor(item.difficulty)}>{item.difficulty}</Tag>
+                    <Tag color="purple">Points: {item.points}</Tag>
+                  </Space>
+                )}
+                extra={(
+                  <Space>
+                    <Button
+                      type="text"
+                      icon={<EditOutlined />}
+                      onClick={() => handleEdit(item)}
+                      style={{ color: '#1677ff' }}
+                    />
+                    <Button
+                      type="text"
+                      icon={<DeleteOutlined />}
+                      danger
+                      onClick={() => handleDelete(item.questionId)}
+                    />
+                  </Space>
+                )}
+              >
+                <div style={{ marginBottom: 8 }}>
+                  <Text strong style={{ color: '#64748b' }}>Options:</Text>
+                  <ul style={{ paddingLeft: 18, margin: 0 }}>
+                    {item.options.map((option) => (
+                      <li key={option.id} style={{ marginBottom: 2, listStyle: 'disc' }}>
+                        <Text>
+                          <span style={{
+                            fontWeight: option.id === item.correctAnswerId ? 700 : 500,
+                            color: option.id === item.correctAnswerId ? '#22c55e' : '#334155',
+                          }}>
+                            {option.id}.
+                          </span>{' '}
+                          {option.text}
+                          {option.id === item.correctAnswerId && (
+                            <Tag color="success" style={{ marginLeft: 8, fontSize: 11 }}>Correct</Tag>
+                          )}
+                        </Text>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Card>
+            </List.Item>
+          )}
+        />
+        <Button
+          type="dashed"
+          icon={<PlusOutlined />}
+          style={{
+            marginTop: 28,
+            width: '100%',
+            borderRadius: 10,
+            fontWeight: 500,
+            fontSize: 16,
+            background: '#f0fdfa',
+            borderColor: '#bae6fd',
+          }}
+          onClick={() => setIsAddModalVisible(true)}
+        >
+          Add New Question
+        </Button>
+      </Card>
+      {/* Edit Modal */}
       <Modal
         title="Edit Question"
-        visible={isModalVisible}
+        open={isModalVisible}
         onCancel={() => setIsModalVisible(false)}
         footer={null}
+        destroyOnClose
       >
         {editingQuestion && (
           <Form
@@ -208,7 +260,12 @@ const ExamPage = ({ questions, setQuestions }) => {
               name="difficulty"
               rules={[{ required: true, message: 'Please input the difficulty!' }]}
             >
-              <Input />
+              <Radio.Group>
+                <Radio value="Easy">Easy</Radio>
+                <Radio value="Medium">Medium</Radio>
+                <Radio value="Hard">Hard</Radio>
+                <Radio value="Dark_Souls">Dark_Souls</Radio>
+              </Radio.Group>
             </Form.Item>
             <Form.Item
               label="Points"
@@ -249,20 +306,13 @@ const ExamPage = ({ questions, setQuestions }) => {
           </Form>
         )}
       </Modal>
-
-      {/* Add Question Section */}
-      <Button
-        type="dashed"
-        style={{ marginTop: 32, width: '100%' }}
-        onClick={() => setIsAddModalVisible(true)}
-      >
-        + Add New Question
-      </Button>
+      {/* Add Modal */}
       <Modal
         title="Add New Question"
-        visible={isAddModalVisible}
+        open={isAddModalVisible}
         onCancel={() => setIsAddModalVisible(false)}
         footer={null}
+        destroyOnClose
       >
         <Form
           initialValues={{
@@ -353,18 +403,21 @@ function FloatingPrintButton({ questions }) {
     <Button
       type="primary"
       shape="circle"
-      icon={<PrinterOutlined style={{ fontSize: 40 }} />}
+      icon={<PrinterOutlined style={{ fontSize: 32 }} />}
       size="large"
       style={{
         position: 'fixed',
         bottom: 32,
         right: 32,
         zIndex: 1000,
-        width: 72,
-        height: 72,
+        width: 64,
+        height: 64,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        boxShadow: '0 4px 16px rgba(22,119,255,0.18)',
+        background: 'linear-gradient(135deg, #38bdf8 0%, #6366f1 100%)',
+        border: 'none',
       }}
       onClick={() => generateExamPdf(questions)}
       title="Print Exam"
