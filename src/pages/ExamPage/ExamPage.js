@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable object-curly-newline */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   List, Card, Button, Input, Modal, Form, Radio, Typography, Tag, Space,
 } from 'antd';
@@ -142,6 +143,15 @@ const ExamPage = ({ questions, setQuestions }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingQuestion, setEditingQuestion] = useState(null);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      alert('Access forbidden. Please log in.');
+      navigate('/');
+    }
+  }, [navigate]);
 
   const handleEdit = (question) => {
     setEditingQuestion(question);
