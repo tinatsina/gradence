@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable object-curly-newline */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   List, Card, Button, Input, Modal, Form, Radio, Typography, Tag, Space,
 } from 'antd';
@@ -14,36 +15,7 @@ import getRandomQuote from '../../scripts/Quotes';
 
 const { Title, Text } = Typography;
 
-const initialQuestions = [
-  {
-    questionId: 'GEO101',
-    topic: 'Geography',
-    difficulty: 'Easy',
-    questionText: 'What is the capital of France?',
-    options: [
-      { id: 'A', text: 'London' },
-      { id: 'B', text: 'Paris' },
-      { id: 'C', text: 'Berlin' },
-      { id: 'D', text: 'Madrid' },
-    ],
-    correctAnswerId: 'B',
-    points: 1,
-  },
-  {
-    questionId: 'MATH101',
-    topic: 'Mathematics',
-    difficulty: 'Medium',
-    questionText: 'What is 2 + 2?',
-    options: [
-      { id: 'A', text: '3' },
-      { id: 'B', text: '4' },
-      { id: 'C', text: '5' },
-      { id: 'D', text: '6' },
-    ],
-    correctAnswerId: 'B',
-    points: 1,
-  },
-];
+// Remove initialQuestions, we will fetch from API
 
 // Helper to shuffle an array (Fisher-Yates)
 function shuffleArray(array) {
@@ -142,6 +114,45 @@ const ExamPage = ({ questions, setQuestions }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [editingQuestion, setEditingQuestion] = useState(null);
   const [isAddModalVisible, setIsAddModalVisible] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (!token) {
+      navigate('/');
+    }
+  }, [navigate]);
+
+  // Fetch questions from API on mount
+  useEffect(() => {
+    async function fetchQuestions() {
+      try {
+        const response = await fetch('https://gradence-trial-deploy.onrender.com/questions');
+        if (!response.ok) throw new Error('Failed to fetch questions');
+        const data = await response.json();
+        // Map API response to your internal format
+        const mappedQuestions = data.map((q) => ({
+          questionId: q.id.toString(),
+          topic: q.question_topic,
+          difficulty: q.question_difficulty,
+          questionText: q.question_text,
+          options: [
+            { id: 'A', text: q.question_option_a },
+            { id: 'B', text: q.question_option_b },
+            { id: 'C', text: q.question_option_c },
+            { id: 'D', text: q.question_option_d },
+          ],
+          correctAnswerId: q.question_correct_answer,
+          points: Number(q.question_points),
+        }));
+        setQuestions(mappedQuestions);
+      } catch (err) {
+        throw new Error(err);
+      }
+    }
+    fetchQuestions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleEdit = (question) => {
     setEditingQuestion(question);
@@ -494,7 +505,7 @@ function FloatingPrintButton({ questions }) {
 
 // Wrap ExamPage with the floating button
 const ExamPageWithPrint = () => {
-  const [questions, setQuestions] = useState(initialQuestions);
+  const [questions, setQuestions] = useState([]);
 
   return (
     <>

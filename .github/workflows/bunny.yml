@@ -1,0 +1,21 @@
+name: Deploy to Bunny Edge
+
+on:
+  push:
+    branches:
+      - deployment  # or whichever branch you want to trigger the deployment
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Deploy Script to Bunny Edge Scripting
+        uses: BunnyWay/actions/deploy-script@main
+        with:
+          script_id: 43866
+          file: "script.ts"
+
