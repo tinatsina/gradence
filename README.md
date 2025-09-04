@@ -2,7 +2,7 @@
 
 This is the fronted development repository for Gradence. An advanced Exam creation tool that allows teachers and exam setters to create an exam once, and get advanced randomization. Gradence goes beyond just mixing numbers but provides multiple methods for exam makers to scramble and make sure each exam is unique.
 
-## 🛠 Built With
+## 🛠 Built With :
 
 ### Tech Stack
 
