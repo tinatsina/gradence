@@ -18,3 +18,4 @@ jobs:
         with:
           script_id: 43866
           file: "script.ts"
+
