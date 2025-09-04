@@ -32,9 +32,7 @@ const NavBar = () => {
     const token = localStorage.getItem('authToken');
     const userId = localStorage.getItem('userId');
 
-    console.log(token, userId);
     if (!token || !userId) {
-      alert('Access forbidden. Please log in.');
       navigate('/');
     }
   }, [navigate]);

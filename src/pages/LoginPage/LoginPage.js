@@ -39,10 +39,8 @@ const LoginPage = () => {
       localStorage.setItem('userId', data.userId);
       navigate('/home');
     } catch (error) {
+      throw new Error(error);
     }
-  };
-
-  const onFinishFailed = (errorInfo) => {
   };
 
   return (
@@ -77,7 +75,6 @@ const LoginPage = () => {
             remember: true,
           }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
           <Form.Item

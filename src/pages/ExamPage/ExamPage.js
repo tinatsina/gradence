@@ -119,7 +119,6 @@ const ExamPage = ({ questions, setQuestions }) => {
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (!token) {
-      alert('Access forbidden. Please log in.');
       navigate('/');
     }
   }, [navigate]);
@@ -148,7 +147,7 @@ const ExamPage = ({ questions, setQuestions }) => {
         }));
         setQuestions(mappedQuestions);
       } catch (err) {
-        alert('Could not load questions from server.');
+        throw new Error(err);
       }
     }
     fetchQuestions();

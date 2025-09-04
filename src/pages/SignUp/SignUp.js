@@ -41,12 +41,10 @@ const SignUp = () => {
       // On success, show alert and redirect to /login
       navigate('/');
     } catch (error) {
+      throw new Error(error);
     } finally {
       setLoading(false);
     }
-  };
-
-  const onFinishFailed = (errorInfo) => {
   };
 
   return (
@@ -106,7 +104,6 @@ const SignUp = () => {
           name="signup"
           layout="vertical"
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
           style={{ animation: 'fadeIn 1.2s' }}
         >
