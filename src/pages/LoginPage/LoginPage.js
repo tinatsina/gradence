@@ -37,15 +37,12 @@ const LoginPage = () => {
       // Store both the authentication key and user id in localStorage
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('userId', data.userId);
-      alert('Login successful! Redirecting to your dashboard...');
       navigate('/home');
     } catch (error) {
-      alert(error.message || 'Login failed');
     }
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (

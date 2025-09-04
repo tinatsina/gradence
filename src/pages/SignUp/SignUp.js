@@ -39,17 +39,14 @@ const SignUp = () => {
       }
 
       // On success, show alert and redirect to /login
-      alert('Registration successful! You can now sign in.');
       navigate('/');
     } catch (error) {
-      alert(error.message || 'Signup failed');
     } finally {
       setLoading(false);
     }
   };
 
   const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (
