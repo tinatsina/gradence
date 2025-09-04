@@ -39,17 +39,12 @@ const SignUp = () => {
       }
 
       // On success, show alert and redirect to /login
-      alert('Registration successful! You can now sign in.');
       navigate('/');
     } catch (error) {
-      alert(error.message || 'Signup failed');
+      throw new Error(error);
     } finally {
       setLoading(false);
     }
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
   };
 
   return (
@@ -109,7 +104,6 @@ const SignUp = () => {
           name="signup"
           layout="vertical"
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
           autoComplete="off"
           style={{ animation: 'fadeIn 1.2s' }}
         >

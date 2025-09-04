@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import ExamCenter from '../../pages/ExamCenter/ExamCenter';
@@ -12,7 +13,7 @@ const items = [
     icon: <MailOutlined />,
   },
   {
-    label: 'Question Panel',
+    label: 'User Panel',
     key: 'question_panel',
     icon: <AppstoreOutlined />,
   },
@@ -22,12 +23,28 @@ const items = [
     icon: <SettingOutlined />,
   },
 ];
+
 const NavBar = () => {
-  // Set initial state to 'exam_center' so Exam Center is selected by default
   const [current, setCurrent] = useState('exam_center');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    const userId = localStorage.getItem('userId');
+
+    if (!token || !userId) {
+      navigate('/');
+    }
+  }, [navigate]);
 
   const onClick = (e) => {
     setCurrent(e.key);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('userId');
+    navigate('/');
   };
 
   const renderDiv = () => {
@@ -49,6 +66,27 @@ const NavBar = () => {
   return (
     <>
       <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />
+      {/* Floating Logout Button */}
+      <button
+        type="button"
+        onClick={handleLogout}
+        style={{
+          position: 'fixed',
+          top: 24,
+          right: 32,
+          zIndex: 1000,
+          background: '#1677ff',
+          color: '#fff',
+          border: 'none',
+          borderRadius: 8,
+          padding: '10px 20px',
+          fontWeight: 600,
+          cursor: 'pointer',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.08)',
+        }}
+      >
+        Logout
+      </button>
       <>{renderDiv()}</>
     </>
   );

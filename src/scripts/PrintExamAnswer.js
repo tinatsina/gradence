@@ -7,11 +7,8 @@ const docDefinition = {
   ],
 };
 
-const now = new Date();
-
 const pdf = pdfmake.createPdf(docDefinition);
 pdf.write('pdfs/basics.pdf').then(() => {
-  console.log(new Date() - now);
 }, (err) => {
-  console.error(err);
+  throw new Error(err);
 });
